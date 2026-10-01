@@ -1,0 +1,1 @@
+Dossier lifestyle : photos et videos de la galerie Lifestyle. Les noms doivent correspondre a content.js (lifestyle-01.jpg, etc.).

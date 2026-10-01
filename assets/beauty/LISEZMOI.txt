@@ -1,0 +1,1 @@
+Dossier beauty : photos et videos de la galerie Beauty. Les noms doivent correspondre a content.js (beauty-01.jpg, beauty-02.mp4, etc.).
