@@ -5,9 +5,9 @@
   Les fichiers en .mp4 / .webm sont lus comme des videos (poster : image de couverture optionnelle).
 */
 window.SITE = {
-  email: "hello@example.com",
-  instagram: "https://www.instagram.com/",
-  tiktok: "https://www.tiktok.com/",
+  email: "contact.sarissa00@gmail.com",
+  instagram: "https://www.instagram.com/sarissaball/",
+  tiktok: "https://www.tiktok.com/youcancallmesarissaball/",
   galleries: {
     beauty: [
       { file: "beauty-01.jpg", ratio: "3 / 4", alt: "Beauty look" },
