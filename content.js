@@ -7,7 +7,7 @@
 window.SITE = {
   email: "contact.sarissa00@gmail.com",
   instagram: "https://www.instagram.com/sarissaball/",
-  tiktok: "https://www.tiktok.com/youcancallmesarissaball/",
+  tiktok: "https://www.tiktok.com/youcancallmesarissa/",
   galleries: {
     beauty: [
       { file: "beauty-01.jpg", ratio: "3 / 4", alt: "Beauty look" },
