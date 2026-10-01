@@ -1,0 +1,39 @@
+# Site de Sarissa : mode d'emploi
+
+Site de 7 pages (Home, Beauty, Fashion, Lifestyle, About, Services, Contact), en anglais, sans abonnement.
+
+## 1. Ajouter ses photos et vidéos
+
+Les fichiers vont dans le dossier `assets`, rangés par catégorie :
+
+- `assets/home/` : `hero.mp4` (vidéo d'accueil, facultative), `hero.jpg`, `beauty.jpg`, `fashion.jpg`, `lifestyle.jpg` (visuels des trois grandes cartes de l'accueil)
+- `assets/beauty/`, `assets/fashion/`, `assets/lifestyle/` : les photos et vidéos de chaque galerie
+- `assets/about/portrait.jpg` : sa photo pour la page About
+
+Les noms de fichiers doivent correspondre à ceux listés dans `content.js` (ex. `beauty-01.jpg`). Pour ajouter, retirer ou renommer un contenu, il suffit de modifier les lignes de `content.js`. Tant qu'un fichier est absent, une vignette rose avec son nom s'affiche à la place.
+
+Conseils : photos en .jpg de 300 à 600 Ko maximum, vidéos en .mp4 de 10 Mo maximum (verticales, 720p), pour que le site reste rapide sur mobile.
+
+## 2. Mettre ses coordonnées
+
+Dans `content.js`, remplacer `email`, `instagram` et `tiktok` par les vraies valeurs.
+
+## 3. Mettre le site en ligne gratuitement avec GitHub Pages
+
+1. Créer un compte sur github.com.
+2. Cliquer sur **New repository**, le nommer par exemple `sarissa`, le laisser en **Public**, puis **Create repository**.
+3. Cliquer sur **uploading an existing file**, glisser tout le contenu du dossier du site (fichiers et dossier `assets`), puis **Commit changes**.
+   Limite de GitHub : 25 Mo maximum par fichier envoyé depuis le navigateur.
+4. Aller dans **Settings, Pages**. Dans **Branch**, choisir `main` et le dossier `/ (root)`, puis **Save**.
+5. Après 1 à 2 minutes, le site est disponible à l'adresse `https://son-pseudo.github.io/sarissa/`.
+
+Pour modifier le site plus tard : ouvrir le dépôt, **Add file, Upload files**, et renvoyer le fichier modifié (il remplace l'ancien).
+
+## 4. Nom de domaine (facultatif)
+
+Un nom du type `sarissa.com` coûte environ 10 à 15 € par an. Il se relie à GitHub Pages dans **Settings, Pages, Custom domain**.
+
+## Notes
+
+- Le formulaire de contact ouvre l'application mail du visiteur avec le message prérempli. Il n'y a pas de serveur, donc rien à payer.
+- Les textes de la page About et de "Why Sarissa" sont des propositions rédigées à partir de sa maquette. À relire et ajuster avec elle.
