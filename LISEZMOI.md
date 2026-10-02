@@ -42,3 +42,4 @@ Le site est en ligne sur **https://sarissa-ugc.com** (domaine acheté sur Cloudf
 - Le formulaire de contact est envoyé directement grâce au service gratuit FormSubmit (formsubmit.co), puis un message de remerciement s'affiche. Les demandes arrivent à l'adresse indiquée dans `content.js` (`email`).
 - Activation (une seule fois) : envoyer une première demande depuis le site, puis cliquer sur le lien d'activation reçu de FormSubmit dans la boîte mail. Tant que ce n'est pas fait, les messages ne sont pas transmis.
 - Après une modification de `style.css`, `script.js` ou `content.js`, augmenter le numéro `?v=` dans les 7 pages .html (ex. `?v=4` devient `?v=5`). Sinon les navigateurs peuvent garder l'ancienne version en mémoire.
+- Statistiques de visites : Cloudflare Web Analytics (Cloudflare > Analytics & Logs > Web Analytics). Le petit script est en bas de chaque page .html, à garder si on ajoute une page.
