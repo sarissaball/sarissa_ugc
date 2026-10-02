@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=7">
+  <link rel="stylesheet" href="style.css?v=8">
 </head>
 <body class="">
   <header class="site-header">
@@ -45,9 +45,15 @@
         </div>
         <label class="field"><span>Email</span><input name="email" type="email" required autocomplete="email" placeholder="you@brand.com"></label>
         <label class="field"><span>Message</span><textarea name="message" required placeholder="Your product, your idea, your timing..."></textarea></label>
+        <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="form-foot">
           <button class="btn dark arrow" type="submit">Send message</button>
-          <p class="hint">Opens your email app with your message ready to send.</p>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </div>
+        <div class="form-done" hidden>
+          <span class="done-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>
+          <h2>Thanks for reaching out!</h2>
+          <p>I'll get back to you soon.</p>
         </div>
       </form>
     </div>
@@ -76,7 +82,7 @@
       <a class="to-top" href="#" data-top>Back to top <span aria-hidden="true">&uarr;</span></a>
     </div>
   </footer>
-  <script src="content.js?v=7"></script>
-  <script src="script.js?v=7"></script>
+  <script src="content.js?v=8"></script>
+  <script src="script.js?v=8"></script>
 </body>
 </html>
