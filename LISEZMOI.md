@@ -29,9 +29,13 @@ Dans `content.js`, remplacer `email`, `instagram` et `tiktok` par les vraies val
 
 Pour modifier le site plus tard : ouvrir le dépôt, **Add file, Upload files**, et renvoyer le fichier modifié (il remplace l'ancien).
 
-## 4. Nom de domaine (facultatif)
+## 4. Nom de domaine
 
-Un nom du type `sarissa.com` coûte environ 10 à 15 € par an. Il se relie à GitHub Pages dans **Settings, Pages, Custom domain**.
+Le site est en ligne sur **https://sarissa-ugc.com** (domaine acheté sur Cloudflare, renouvellement automatique activé).
+
+- Réglages DNS dans Cloudflare : 4 enregistrements A vers `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` et un CNAME `www` vers `sarissaball.github.io`, tous en **DNS only** (nuage gris). Ne pas activer le proxy (nuage orange).
+- Le fichier `CNAME` du dépôt contient le nom de domaine : ne pas le supprimer.
+- L'adresse `hello@sarissa-ugc.com` est redirigée vers la boîte Gmail via Cloudflare Email Routing.
 
 ## Notes
 

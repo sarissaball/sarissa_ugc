@@ -5,7 +5,7 @@
   Les fichiers en .mp4 / .webm sont lus comme des videos (poster : image de couverture optionnelle).
 */
 window.SITE = {
-  email: "contact.sarissa00@gmail.com",
+  email: "hello@sarissa-ugc.com",
   instagram: "https://www.instagram.com/sarissaball/",
   tiktok: "https://www.tiktok.com/@youcancallmesarissa",
   galleries: {
