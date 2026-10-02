@@ -247,15 +247,40 @@
     document.body.classList.remove('no-scroll');
   }
 
-  /* Contact form: opens the visitor's mail app */
+  /* Contact form: sent directly through FormSubmit, then a thank-you message replaces the form */
   var form = $('#contact-form');
   if (form) {
+    var btn = $('button[type="submit"]', form);
+    var status = $('.form-status', form);
+    var label = btn.textContent;
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var d = new FormData(form);
-      var subject = 'Collaboration: ' + (d.get('brand') || 'new brand');
-      var body = d.get('message') + '\n\n' + d.get('name') + '\n' + d.get('email');
-      window.location.href = 'mailto:' + SITE.email + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      if (d.get('_honey')) return;
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+      status.textContent = '';
+      fetch('https://formsubmit.co/ajax/' + SITE.email, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          name: d.get('name'),
+          brand: d.get('brand') || '-',
+          email: d.get('email'),
+          message: d.get('message'),
+          _subject: 'New collaboration request: ' + (d.get('brand') || d.get('name')),
+          _template: 'table',
+          _captcha: 'false'
+        })
+      }).then(function (r) { return r.json(); }).then(function (res) {
+        if (String(res.success) !== 'true') throw new Error(res.message || 'Not sent');
+        form.classList.add('sent');
+        $('.form-done', form).hidden = false;
+      }).catch(function () {
+        btn.disabled = false;
+        btn.textContent = label;
+        status.innerHTML = 'Something went wrong. Please email me at <a href="mailto:' + SITE.email + '">' + SITE.email + '</a>.';
+      });
     });
   }
 })();
