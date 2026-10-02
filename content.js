@@ -49,7 +49,8 @@ window.SITE = {
       { file: "lifestyle-08.mp4", ratio: "9 / 16", alt: "Lifestyle video", poster: "lifestyle-08.jpg" },
       { file: "lifestyle-09.jpg", ratio: "3 / 4", alt: "Lifestyle moment" },
       { file: "lifestyle-10.jpg", ratio: "3 / 4", alt: "Lifestyle moment" },
-      { file: "lifestyle-11.jpg", ratio: "3 / 4", alt: "Lifestyle moment" }
+      { file: "lifestyle-11.jpg", ratio: "3 / 4", alt: "Lifestyle moment" },
+      { file: "lifestyle-12.jpg", ratio: "9 / 16", alt: "Lifestyle moment" }
     ]
   }
 };
