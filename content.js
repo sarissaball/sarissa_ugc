@@ -18,7 +18,11 @@ window.SITE = {
       { file: "beauty-06.jpg", ratio: "9 / 16", alt: "Beauty look" },
       { file: "beauty-07.mp4", ratio: "9 / 16", alt: "Beauty video", poster: "beauty-07.jpg" },
       { file: "beauty-08.jpg", ratio: "9 / 16", alt: "Beauty look" },
-      { file: "beauty-09.mp4", ratio: "9 / 16", alt: "Beauty video", poster: "beauty-09.jpg" }
+      { file: "beauty-09.mp4", ratio: "9 / 16", alt: "Beauty video", poster: "beauty-09.jpg" },
+      { file: "beauty-10.mp4", ratio: "9 / 16", alt: "Beauty video", poster: "beauty-10.jpg" },
+      { file: "beauty-11.jpg", ratio: "9 / 16", alt: "Beauty look" },
+      { file: "beauty-12.mp4", ratio: "9 / 16", alt: "Beauty video", poster: "beauty-12.jpg" },
+      { file: "beauty-13.mp4", ratio: "9 / 16", alt: "Beauty video", poster: "beauty-13.jpg" }
     ],
     fashion: [
       { file: "fashion-01.jpg", ratio: "3 / 4", alt: "Fashion look" },
