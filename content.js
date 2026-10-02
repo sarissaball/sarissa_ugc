@@ -10,18 +10,15 @@ window.SITE = {
   tiktok: "https://www.tiktok.com/@youcancallmesarissa",
   galleries: {
     beauty: [
-      { file: "beauty-01.jpg", ratio: "3 / 4", alt: "Beauty look" },
+      { file: "beauty-01.jpg", ratio: "9 / 16", alt: "Beauty look" },
       { file: "beauty-02.mp4", ratio: "9 / 16", alt: "Beauty video", poster: "beauty-02.jpg" },
-      { file: "beauty-03.jpg", ratio: "4 / 5", alt: "Beauty look" },
-      { file: "beauty-04.jpg", ratio: "1 / 1", alt: "Beauty look" },
-      { file: "beauty-05.jpg", ratio: "3 / 4", alt: "Beauty look" },
-      { file: "beauty-06.mp4", ratio: "9 / 16", alt: "Beauty video", poster: "beauty-06.jpg" },
-      { file: "beauty-07.jpg", ratio: "4 / 5", alt: "Beauty look" },
-      { file: "beauty-08.jpg", ratio: "3 / 4", alt: "Beauty look" },
-      { file: "beauty-09.jpg", ratio: "1 / 1", alt: "Beauty look" },
-      { file: "beauty-10.jpg", ratio: "3 / 4", alt: "Beauty look" },
-      { file: "beauty-11.jpg", ratio: "4 / 5", alt: "Beauty look" },
-      { file: "beauty-12.jpg", ratio: "3 / 4", alt: "Beauty look" }
+      { file: "beauty-03.jpg", ratio: "9 / 16", alt: "Beauty look" },
+      { file: "beauty-04.jpg", ratio: "9 / 16", alt: "Beauty look" },
+      { file: "beauty-05.mp4", ratio: "9 / 16", alt: "Beauty video", poster: "beauty-05.jpg" },
+      { file: "beauty-06.jpg", ratio: "9 / 16", alt: "Beauty look" },
+      { file: "beauty-07.mp4", ratio: "9 / 16", alt: "Beauty video", poster: "beauty-07.jpg" },
+      { file: "beauty-08.jpg", ratio: "9 / 16", alt: "Beauty look" },
+      { file: "beauty-09.mp4", ratio: "9 / 16", alt: "Beauty video", poster: "beauty-09.jpg" }
     ],
     fashion: [
       { file: "fashion-01.jpg", ratio: "3 / 4", alt: "Fashion look" },
