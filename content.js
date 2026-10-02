@@ -39,16 +39,11 @@ window.SITE = {
       { file: "fashion-08.jpg", ratio: "3 / 4", alt: "Fashion look" }
     ],
     lifestyle: [
-      { file: "lifestyle-01.jpg", ratio: "4 / 5", alt: "Lifestyle moment" },
-      { file: "lifestyle-02.jpg", ratio: "3 / 4", alt: "Lifestyle moment" },
-      { file: "lifestyle-03.jpg", ratio: "1 / 1", alt: "Lifestyle moment" },
+      { file: "lifestyle-01.jpg", ratio: "4 / 3", alt: "Lifestyle moment" },
+      { file: "lifestyle-02.mp4", ratio: "9 / 16", alt: "Lifestyle video", poster: "lifestyle-02.jpg" },
+      { file: "lifestyle-03.jpg", ratio: "4 / 3", alt: "Lifestyle moment" },
       { file: "lifestyle-04.mp4", ratio: "9 / 16", alt: "Lifestyle video", poster: "lifestyle-04.jpg" },
-      { file: "lifestyle-05.jpg", ratio: "3 / 4", alt: "Lifestyle moment" },
-      { file: "lifestyle-06.jpg", ratio: "4 / 5", alt: "Lifestyle moment" },
-      { file: "lifestyle-07.jpg", ratio: "1 / 1", alt: "Lifestyle moment" },
-      { file: "lifestyle-08.jpg", ratio: "3 / 4", alt: "Lifestyle moment" },
-      { file: "lifestyle-09.jpg", ratio: "4 / 5", alt: "Lifestyle moment" },
-      { file: "lifestyle-10.jpg", ratio: "3 / 4", alt: "Lifestyle moment" }
+      { file: "lifestyle-05.jpg", ratio: "4 / 3", alt: "Lifestyle moment" }
     ]
   }
 };
