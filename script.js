@@ -62,6 +62,27 @@
     });
   });
 
+  /* Home category blocks: video plays on hover (or when visible on touch screens) */
+  $$('.world video').forEach(function (v) {
+    var card = v.parentNode;
+    v.addEventListener('error', function () { v.hidden = true; });
+    v.addEventListener('playing', function () { v.classList.add('playing'); });
+    function start() { v.preload = 'auto'; v.play().catch(function () {}); }
+    function stop() { v.pause(); v.classList.remove('playing'); try { v.currentTime = 0; } catch (e) {} }
+    if (touch) {
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) { if (en.isIntersecting) start(); else stop(); });
+        }, { threshold: 0.6 }).observe(card);
+      }
+    } else if (!reduce) {
+      card.addEventListener('mouseenter', start);
+      card.addEventListener('mouseleave', stop);
+      card.addEventListener('focus', start);
+      card.addEventListener('blur', stop);
+    }
+  });
+
   /* Scroll reveal */
   var io = ('IntersectionObserver' in window) ? new IntersectionObserver(function (entries) {
     entries.forEach(function (en) {
