@@ -144,30 +144,46 @@
       tile.appendChild(ph);
 
       tile.addEventListener('click', function () { if (!tile.classList.contains('missing')) openLb(tile); });
-      gallery.appendChild(tile);
       tiles.push(tile);
       reveal(tile);
     });
   }
 
-  /* Gallery: gentle parallax on the tiles */
-  if (tiles.length && !reduce && !touch) {
-    var speeds = [0.05, -0.035, 0.08, -0.05, 0.03, -0.07];
-    var ticking = false;
-    var update = function () {
-      var mid = window.innerHeight / 2;
+  /* Gallery: justified rows. Each row fills the full width and every tile keeps its own format,
+     so nothing overlaps, nothing is cropped and there are no empty gaps. */
+  if (tiles.length) {
+    var lastW = 0;
+    var aspects = tiles.map(function (t) {
+      var r = (t.style.getPropertyValue('--ratio') || '3 / 4').split('/');
+      var a = (parseFloat(r[0]) || 3) / (parseFloat(r[1]) || 4);
+      t.style.setProperty('--a', a.toFixed(4));
+      return a;
+    });
+    var total = aspects.reduce(function (x, y) { return x + y; }, 0);
+    var layout = function () {
+      var w = gallery.clientWidth;
+      if (!w || w === lastW) return;
+      lastW = w;
+      var target = w >= 900 ? 430 : w >= 600 ? 340 : 250;
+      var rows = Math.max(1, Math.min(tiles.length, Math.round(total * target / w)));
+      var per = total / rows, cum = 0, row = null, done = 0;
+      gallery.innerHTML = '';
       tiles.forEach(function (t, i) {
-        var r = t.getBoundingClientRect();
-        if (r.bottom < -200 || r.top > window.innerHeight + 200) return;
-        var off = (r.top + r.height / 2 - mid) * speeds[i % speeds.length];
-        t.style.setProperty('--py', off.toFixed(1) + 'px');
+        var mustBreak = row && tiles.length - i <= rows - done;
+        var wantBreak = row && done < rows && cum + aspects[i] / 2 > per * done;
+        if (!row || mustBreak || wantBreak) {
+          row = document.createElement('div');
+          row.className = 'grow';
+          gallery.appendChild(row);
+          done++;
+        }
+        row.appendChild(t);
+        cum += aspects[i];
       });
-      ticking = false;
     };
-    window.addEventListener('scroll', function () {
-      if (!ticking) { ticking = true; requestAnimationFrame(update); }
-    }, { passive: true });
-    update();
+    layout();
+    var rt;
+    window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(layout, 120); });
   }
 
   /* Lightbox */

@@ -118,16 +118,19 @@ body::after{width:40vw;height:40vw;right:-12vw;bottom:-6vh;background:radial-gra
 .split .c{display:inline-block;animation:rise 1s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i) * 45ms + 150ms)}
 
 /* Galleries */
-.gallery{columns:3 280px;column-gap:1rem;padding:0 var(--pad) 3rem}
-.tile{position:relative;display:block;width:100%;margin:0 0 1rem;padding:0;border:0;border-radius:1.1rem;overflow:hidden;break-inside:avoid;cursor:zoom-in;aspect-ratio:var(--ratio,3 / 4);
-  background:linear-gradient(150deg,#EBDFD9,#DDC5C4);opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease;transition-delay:calc(var(--i,0) * 70ms);translate:0 var(--py,0px)}
+.gallery{display:flex;flex-direction:column;gap:1rem;padding:0 var(--pad) 3rem}
+.grow{display:flex;align-items:flex-start;gap:1rem}
+.grow .tile{flex:var(--a,1) 1 0;min-width:0}
+@media (max-width:600px){.gallery,.grow{gap:.6rem}}
+.tile{position:relative;display:block;width:100%;margin:0;padding:0;border:0;border-radius:1.1rem;overflow:hidden;isolation:isolate;cursor:zoom-in;aspect-ratio:var(--ratio,3 / 4);
+  background:linear-gradient(150deg,#EBDFD9,#DDC5C4);opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease;transition-delay:calc(var(--i,0) * 70ms)}
 .tile:nth-child(3n+2){background:linear-gradient(150deg,#DDC5C4,#C5999D)}
 .tile:nth-child(3n){background:linear-gradient(150deg,#EBDFD9,#CDA7AA)}
 .tile.in{opacity:1;transform:none}
 .tile::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 50%,rgba(124,22,40,.6));opacity:0;transition:opacity .5s}
 .tile:hover::after,.tile:focus-visible::after{opacity:1}
 .tile img,.tile video{display:block;width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
-.tile:hover img,.tile:hover video{transform:scale(1.07)}
+@media (hover:hover){.tile:hover img,.tile:hover video{transform:scale(1.04)}}
 .tile.is-video::before{content:"";position:absolute;right:.8rem;top:.8rem;z-index:2;width:2rem;height:2rem;border-radius:50%;background:rgba(124,22,40,.85) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M9 6.5v11l9-5.5z'/%3E%3C/svg%3E") center/60% no-repeat}
 .tile .ph{position:absolute;inset:0;z-index:1;display:none;align-items:center;justify-content:center;padding:1rem;text-align:center;font-size:.85rem;color:var(--wine)}
 .tile.missing{cursor:default}
