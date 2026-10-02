@@ -40,6 +40,15 @@
     el.target = '_blank';
     el.rel = 'noopener';
   });
+  $$('[data-email-text]').forEach(function (el) { el.textContent = SITE.email; });
+  $$('[data-handle]').forEach(function (el) {
+    var url = SITE[el.getAttribute('data-handle')] || '';
+    var h = url.replace(/\/+$/, '').split('/').pop().replace(/^@/, '');
+    if (h) el.textContent = '@' + h;
+  });
+  $$('[data-top]').forEach(function (el) {
+    el.addEventListener('click', function (e) { e.preventDefault(); window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); });
+  });
   $$('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
 
   /* Titles: split into words and letters for the entrance animation */
