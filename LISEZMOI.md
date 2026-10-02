@@ -36,5 +36,4 @@ Un nom du type `sarissa.com` coûte environ 10 à 15 € par an. Il se relie à 
 ## Notes
 
 - Le formulaire de contact ouvre l'application mail du visiteur avec le message prérempli. Il n'y a pas de serveur, donc rien à payer.
-- Les textes de la page About et de "Why Sarissa" sont des propositions rédigées à partir de sa maquette. À relire et ajuster avec elle.
 - Après une modification de `style.css`, `script.js` ou `content.js`, augmenter le numéro `?v=` dans les 7 pages .html (ex. `?v=4` devient `?v=5`). Sinon les navigateurs peuvent garder l'ancienne version en mémoire.
