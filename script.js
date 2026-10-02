@@ -149,36 +149,33 @@
     });
   }
 
-  /* Gallery: justified rows. Each row fills the full width and every tile keeps its own format,
-     so nothing overlaps, nothing is cropped and there are no empty gaps. */
+  /* Gallery: masonry. Each tile goes into the shortest column; the tiles then grow slightly
+     so every column ends at the same height (no overlap, no movement, no empty gap). */
   if (tiles.length) {
-    var lastW = 0;
-    var aspects = tiles.map(function (t) {
+    var cols = 0;
+    var heights = tiles.map(function (t) {
       var r = (t.style.getPropertyValue('--ratio') || '3 / 4').split('/');
-      var a = (parseFloat(r[0]) || 3) / (parseFloat(r[1]) || 4);
-      t.style.setProperty('--a', a.toFixed(4));
-      return a;
+      var h = (parseFloat(r[1]) || 4) / (parseFloat(r[0]) || 3);
+      t.style.setProperty('--h', (h * 10).toFixed(3));
+      return h;
     });
-    var total = aspects.reduce(function (x, y) { return x + y; }, 0);
     var layout = function () {
       var w = gallery.clientWidth;
-      if (!w || w === lastW) return;
-      lastW = w;
-      var target = w >= 900 ? 430 : w >= 600 ? 340 : 250;
-      var rows = Math.max(1, Math.min(tiles.length, Math.round(total * target / w)));
-      var per = total / rows, cum = 0, row = null, done = 0;
+      var n = Math.min(tiles.length, w >= 900 ? 3 : 2);
+      if (!w || n === cols) return;
+      cols = n;
       gallery.innerHTML = '';
+      var colEls = [], sums = [];
+      for (var c = 0; c < n; c++) {
+        var col = document.createElement('div');
+        col.className = 'gcol';
+        gallery.appendChild(col);
+        colEls.push(col); sums.push(0);
+      }
       tiles.forEach(function (t, i) {
-        var mustBreak = row && tiles.length - i <= rows - done;
-        var wantBreak = row && done < rows && cum + aspects[i] / 2 > per * done;
-        if (!row || mustBreak || wantBreak) {
-          row = document.createElement('div');
-          row.className = 'grow';
-          gallery.appendChild(row);
-          done++;
-        }
-        row.appendChild(t);
-        cum += aspects[i];
+        var k = sums.indexOf(Math.min.apply(null, sums));
+        colEls[k].appendChild(t);
+        sums[k] += heights[i] + 0.06;
       });
     };
     layout();
