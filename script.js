@@ -22,10 +22,10 @@
     var href = a.getAttribute('href');
     if (!/\.html$/.test(href) || a.target === '_blank') return;
     a.addEventListener('click', function (e) {
-      if (e.metaKey || e.ctrlKey || e.shiftKey || reduce) return;
+      if (e.metaKey || e.ctrlKey || e.shiftKey || reduce || touch) return;
       e.preventDefault();
       document.body.classList.add('leaving');
-      setTimeout(function () { window.location.href = href; }, 280);
+      setTimeout(function () { window.location.href = href; }, 180);
     });
   });
   window.addEventListener('pageshow', function () { document.body.classList.remove('leaving'); });
@@ -109,12 +109,19 @@
   if (gallery) {
     var key = gallery.getAttribute('data-gallery');
     var items = (SITE.galleries && SITE.galleries[key]) || [];
+    /* On phones, only the most visible video plays, so the page stays smooth */
+    var seen = new Map(), playing = null;
     var vio = ('IntersectionObserver' in window && touch) ? new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
-        if (en.isIntersecting) en.target.play().catch(function () {});
-        else en.target.pause();
+        if (en.intersectionRatio >= 0.6) seen.set(en.target, en.intersectionRatio); else seen.delete(en.target);
       });
-    }, { threshold: 0.6 }) : null;
+      var best = null, max = 0;
+      seen.forEach(function (r, v) { if (r > max) { max = r; best = v; } });
+      if (best === playing) return;
+      if (playing) playing.pause();
+      playing = best;
+      if (best) best.play().catch(function () {});
+    }, { threshold: [0, 0.6, 0.8, 1] }) : null;
 
     items.forEach(function (it, i) {
       var src = 'assets/' + key + '/' + it.file;
@@ -133,7 +140,7 @@
       if (isVideo) {
         media = document.createElement('video');
         media.muted = true; media.loop = true; media.playsInline = true;
-        media.setAttribute('muted', ''); media.preload = 'metadata';
+        media.setAttribute('muted', ''); media.preload = 'none';
         if (it.poster) media.poster = 'assets/' + key + '/' + it.poster;
         media.src = src;
         if (vio) vio.observe(media);
@@ -143,9 +150,16 @@
         }
       } else {
         media = document.createElement('img');
-        media.loading = 'lazy'; media.alt = it.alt || ''; media.src = src;
+        media.loading = 'lazy'; media.decoding = 'async'; media.alt = it.alt || '';
+        media.src = 'assets/' + key + '/sm/' + it.file;
+        media.addEventListener('error', function retry(e) {
+          media.removeEventListener('error', retry);
+          e.stopImmediatePropagation();
+          media.addEventListener('error', function () { tile.classList.add('missing'); media.remove(); });
+          media.src = src;
+        });
       }
-      media.addEventListener('error', function () { tile.classList.add('missing'); media.remove(); });
+      if (isVideo) media.addEventListener('error', function () { tile.classList.add('missing'); media.remove(); });
       tile.appendChild(media);
 
       var ph = document.createElement('span');
