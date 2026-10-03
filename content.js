@@ -31,7 +31,8 @@ window.SITE = {
     fashion: [
       { file: "fashion-01.jpg", ratio: "9 / 16", alt: "Fashion look" },
       { file: "fashion-02.mp4", ratio: "9 / 16", alt: "Fashion video", poster: "fashion-02.jpg" },
-      { file: "fashion-03.jpg", ratio: "4 / 3", alt: "Fashion details" }
+      { file: "fashion-03.jpg", ratio: "4 / 3", alt: "Fashion details" },
+      { file: "fashion-04.jpg", ratio: "3 / 4", alt: "Silver heels and disco balls" }
     ],
     lifestyle: [
       { file: "lifestyle-01.jpg", ratio: "4 / 3", alt: "Lifestyle moment" },

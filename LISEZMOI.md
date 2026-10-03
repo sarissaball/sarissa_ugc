@@ -14,6 +14,10 @@ Les noms de fichiers doivent correspondre à ceux listés dans `content.js` (ex.
 
 Conseils : photos en .jpg de 300 à 600 Ko maximum, vidéos en .mp4 de 10 Mo maximum (verticales, 720p), pour que le site reste rapide sur mobile.
 
+### Vignettes légères (facultatif mais recommandé)
+
+Pour que les galeries restent fluides sur téléphone, chaque photo a une version légère dans un sous-dossier `sm/` (ex. `assets/beauty/sm/beauty-01.jpg`, 800 px de large). Si la version légère n'existe pas, le site affiche automatiquement la photo d'origine : rien ne casse, c'est juste un peu plus lourd. Pour en créer une, réduire la photo à 800 px de large (Aperçu sur Mac, Photos sur Windows, ou squoosh.app) et l'enregistrer sous le même nom dans `sm/`.
+
 ## 2. Mettre ses coordonnées
 
 Dans `content.js`, remplacer `email`, `instagram` et `tiktok` par les vraies valeurs.
