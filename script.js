@@ -71,21 +71,29 @@
     });
   });
 
-  /* Home hero video: loops while visible, pauses off screen (and stays still if the visitor prefers less motion) */
+  /* Home hero video: always loops while visible. If the browser blocks autoplay
+     (energy saving mode for example), it starts at the visitor's first touch, click or scroll. */
   var heroVid = $('.hero-video');
   if (heroVid) {
     if (window.matchMedia('(min-width: 821px) and (min-aspect-ratio: 4/5)').matches) heroVid.poster = 'assets/home/hero-wide-poster.jpg';
-    if (reduce) { heroVid.removeAttribute('autoplay'); heroVid.pause(); }
-    else if ('IntersectionObserver' in window) {
+    heroVid.muted = true;
+    var heroVisible = true;
+    var playHero = function () { if (heroVisible && heroVid.paused) heroVid.play().catch(function () {}); };
+    var kick = function () { playHero(); if (!heroVid.paused) ['pointerdown', 'touchstart', 'keydown', 'scroll'].forEach(function (t) { window.removeEventListener(t, kick); }); };
+    ['pointerdown', 'touchstart', 'keydown', 'scroll'].forEach(function (t) { window.addEventListener(t, kick, { passive: true }); });
+    heroVid.addEventListener('canplay', playHero);
+    if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (entries) {
-        entries.forEach(function (en) { if (en.isIntersecting) heroVid.play().catch(function () {}); else heroVid.pause(); });
+        entries.forEach(function (en) { heroVisible = en.isIntersecting; if (heroVisible) playHero(); else heroVid.pause(); });
       }).observe(heroVid);
     }
+    playHero();
   }
 
   /* Home category blocks: video plays on hover (or when visible on touch screens) */
   $$('.world video').forEach(function (v) {
     var card = v.parentNode;
+    v.muted = true;
     v.addEventListener('error', function () { v.hidden = true; });
     v.addEventListener('playing', function () { v.classList.add('playing'); });
     function start() { v.preload = 'auto'; v.play().catch(function () {}); }
@@ -96,7 +104,7 @@
           entries.forEach(function (en) { if (en.isIntersecting) start(); else stop(); });
         }, { threshold: 0.6 }).observe(card);
       }
-    } else if (!reduce) {
+    } else {
       card.addEventListener('mouseenter', start);
       card.addEventListener('mouseleave', stop);
       card.addEventListener('focus', start);
