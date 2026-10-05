@@ -54,8 +54,9 @@ body::after{width:40vw;height:40vw;right:-12vw;bottom:-6vh;background:radial-gra
 .hero-media{position:absolute;inset:0;background:radial-gradient(60% 80% at 50% 40%,#4a0a1a 0,#24030c 55%,#160208 100%)}
 .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%}
 @media (min-width:821px) and (min-aspect-ratio:4/5){
-  /* Wide screens: full-width video (a face crop made for wide screens), like the photo before */
-  .hero-video{object-position:50% 75%}
+  /* Wide screens: the face-cropped video takes about two thirds of the width, its edges melting into the wine background */
+  .hero-video{left:50%;right:auto;width:auto;height:100%;aspect-ratio:1440 / 1280;object-position:50% 50%;transform:translateX(-50%);
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%)}
 }
 }
 .hero-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 70%;animation:settle 2.4s cubic-bezier(.2,.7,.2,1) both}
