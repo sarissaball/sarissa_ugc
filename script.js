@@ -71,6 +71,17 @@
     });
   });
 
+  /* Home hero video: loops while visible, pauses off screen (and stays still if the visitor prefers less motion) */
+  var heroVid = $('.hero-video');
+  if (heroVid) {
+    if (reduce) { heroVid.removeAttribute('autoplay'); heroVid.pause(); }
+    else if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) { if (en.isIntersecting) heroVid.play().catch(function () {}); else heroVid.pause(); });
+      }).observe(heroVid);
+    }
+  }
+
   /* Home category blocks: video plays on hover (or when visible on touch screens) */
   $$('.world video').forEach(function (v) {
     var card = v.parentNode;
