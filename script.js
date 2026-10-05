@@ -86,7 +86,9 @@
       autoplayBlocked = true;
       var img = document.createElement('img');
       img.className = 'hero-video'; img.alt = heroVid.getAttribute('aria-label') || '';
-      img.src = wide ? 'assets/home/hero-wide-anim.webp' : 'assets/home/hero-anim.webp';
+      /* Safari plays an MP4 given as an image: smooth, full quality, no button. Other browsers fall back to the WebP. */
+      img.onerror = function () { img.onerror = null; img.src = wide ? 'assets/home/hero-wide-anim.webp' : 'assets/home/hero-anim.webp'; };
+      img.src = wide ? 'assets/home/hero-wide.mp4' : 'assets/home/hero.mp4';
       heroVid.parentNode.replaceChild(img, heroVid);
     };
     var heroVisible = true;
@@ -116,7 +118,8 @@
       if (!anim) {
         anim = document.createElement('img');
         anim.className = 'world-anim'; anim.alt = ''; anim.setAttribute('aria-hidden', 'true');
-        anim.src = v.getAttribute('src').replace(/\.mp4$/, '-anim.webp');
+        anim.onerror = function () { anim.onerror = null; anim.src = v.getAttribute('src').replace(/\.mp4$/, '-anim.webp'); };
+        anim.src = v.getAttribute('src');
         card.insertBefore(anim, v);
       }
       anim.classList.add('on');

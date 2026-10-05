@@ -86,11 +86,14 @@ body::after{width:40vw;height:40vw;right:-12vw;bottom:-6vh;background:radial-gra
      and the fade to the page starts at the buttons. */
   .hero{--vw:calc(100vw - 2 * clamp(20px,4vw,72px));min-height:0;height:calc(var(--vw) * 1600 / 1440);align-items:stretch}
   .hero-video{left:50%;right:auto;width:var(--vw);height:100%;object-fit:cover;object-position:50% 50%;transform:translateX(-50%);
-    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%)}
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 13%,#000 87%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 13%,#000 87%,transparent 100%)}
+  /* Sides fade to black so the edges melt into her dark hair */
+  .hero-media{background:linear-gradient(90deg,#030102 0,#080206 22%,#120309 50%,#080206 78%,#030102 100%)}
   .hero-inner{display:flex;flex-direction:column;align-items:center;height:100%;padding:32vw var(--pad) clamp(2.5rem,4.5vw,5rem)}
-  .wordmark-xl{margin-bottom:auto}
   .hero::before{background:linear-gradient(180deg,rgba(124,22,40,.22) 0,rgba(62,11,20,0) 25%,rgba(20,3,8,.12) 55%,rgba(20,3,8,.35) 80%,rgba(20,3,8,.2) 100%)}
   .hero::after{height:24%}
+  /* Buttons now sit on the dark video: light outline for the second one */
+  .hero .btn.ghost{color:var(--paper);border-color:rgba(245,241,235,.7)}
 }
 .btn.dark{background:var(--wine);border-color:var(--wine);color:var(--paper)}
 .btn.dark:hover{background:var(--ink);border-color:var(--ink)}
