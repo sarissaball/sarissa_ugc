@@ -71,20 +71,37 @@
     });
   });
 
-  /* Home hero video: always loops while visible. If the browser blocks autoplay
-     (energy saving mode for example), it starts at the visitor's first touch, click or scroll. */
+  /* Home videos. Some browsers block autoplay entirely (Safari energy saving or "Never auto-play"):
+     then a lightweight animated image (WebP) takes the video's place, so the motion is always there. */
+  var wide = window.matchMedia('(min-width: 821px) and (min-aspect-ratio: 4/5)').matches;
+  var autoplayBlocked = false;
+  var isBlocked = function (err) { return err && (err.name === 'NotAllowedError' || err.name === 'NotSupportedError'); };
+
   var heroVid = $('.hero-video');
   if (heroVid) {
-    if (window.matchMedia('(min-width: 821px) and (min-aspect-ratio: 4/5)').matches) heroVid.poster = 'assets/home/hero-wide-poster.jpg';
-    heroVid.muted = true;
+    if (wide) heroVid.poster = 'assets/home/hero-wide-poster.jpg';
+    heroVid.muted = true; heroVid.defaultMuted = true;
+    var heroToImage = function () {
+      if (!heroVid.parentNode) return;
+      autoplayBlocked = true;
+      var img = document.createElement('img');
+      img.className = 'hero-video'; img.alt = heroVid.getAttribute('aria-label') || '';
+      img.src = wide ? 'assets/home/hero-wide-anim.webp' : 'assets/home/hero-anim.webp';
+      heroVid.parentNode.replaceChild(img, heroVid);
+    };
     var heroVisible = true;
-    var playHero = function () { if (heroVisible && heroVid.paused) heroVid.play().catch(function () {}); };
-    var kick = function () { playHero(); if (!heroVid.paused) ['pointerdown', 'touchstart', 'keydown', 'scroll'].forEach(function (t) { window.removeEventListener(t, kick); }); };
-    ['pointerdown', 'touchstart', 'keydown', 'scroll'].forEach(function (t) { window.addEventListener(t, kick, { passive: true }); });
+    var playHero = function () {
+      if (!heroVisible || !heroVid.parentNode || !heroVid.paused) return;
+      var p = heroVid.play();
+      if (p && p.catch) p.catch(function (err) { if (isBlocked(err)) heroToImage(); });
+    };
+    heroVid.addEventListener('error', heroToImage, true);
     heroVid.addEventListener('canplay', playHero);
+    /* Safety net: if the video is loaded but still has not started after 4 s, use the animated image */
+    setTimeout(function () { if (heroVid.parentNode && heroVid.paused && heroVisible && heroVid.readyState >= 2) heroToImage(); }, 4000);
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (entries) {
-        entries.forEach(function (en) { heroVisible = en.isIntersecting; if (heroVisible) playHero(); else heroVid.pause(); });
+        entries.forEach(function (en) { heroVisible = en.isIntersecting; if (heroVisible) playHero(); else if (heroVid.parentNode) heroVid.pause(); });
       }).observe(heroVid);
     }
     playHero();
@@ -93,11 +110,29 @@
   /* Home category blocks: video plays on hover (or when visible on touch screens) */
   $$('.world video').forEach(function (v) {
     var card = v.parentNode;
-    v.muted = true;
+    var anim = null;
+    v.muted = true; v.defaultMuted = true;
+    var showAnim = function () {
+      if (!anim) {
+        anim = document.createElement('img');
+        anim.className = 'world-anim'; anim.alt = ''; anim.setAttribute('aria-hidden', 'true');
+        anim.src = v.getAttribute('src').replace(/\.mp4$/, '-anim.webp');
+        card.insertBefore(anim, v);
+      }
+      anim.classList.add('on');
+    };
     v.addEventListener('error', function () { v.hidden = true; });
     v.addEventListener('playing', function () { v.classList.add('playing'); });
-    function start() { v.preload = 'auto'; v.play().catch(function () {}); }
-    function stop() { v.pause(); v.classList.remove('playing'); try { v.currentTime = 0; } catch (e) {} }
+    function start() {
+      if (autoplayBlocked) { showAnim(); return; }
+      v.preload = 'auto';
+      var p = v.play();
+      if (p && p.catch) p.catch(function (err) { if (isBlocked(err)) { autoplayBlocked = true; showAnim(); } });
+    }
+    function stop() {
+      v.pause(); v.classList.remove('playing'); try { v.currentTime = 0; } catch (e) {}
+      if (anim) anim.classList.remove('on');
+    }
     if (touch) {
       if ('IntersectionObserver' in window) {
         new IntersectionObserver(function (entries) {

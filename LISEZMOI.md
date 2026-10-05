@@ -6,7 +6,7 @@ Site de 7 pages (Home, Beauty, Fashion, Lifestyle, About, Services, Contact), en
 
 Les fichiers vont dans le dossier `assets`, rangés par catégorie :
 
-- `assets/home/` : `hero.mp4` (vidéo d'accueil en boucle, verticale, sans son) et `hero-poster.jpg` (sa première image, affichée le temps du chargement), plus `hero-wide.mp4` / `hero-wide-poster.jpg` (la même vidéo recadrée sur le visage, en haute définition, chargée seulement sur ordinateur), `beauty.jpg`, `fashion.jpg`, `lifestyle.jpg` (visuels des trois grandes cartes de l'accueil)
+- `assets/home/` : `hero.mp4` (vidéo d'accueil en boucle, verticale, sans son) et `hero-poster.jpg` (sa première image, affichée le temps du chargement), plus `hero-wide.mp4` / `hero-wide-poster.jpg` (la même vidéo recadrée sur le visage, en haute définition, chargée seulement sur ordinateur). Les fichiers `*-anim.webp` sont des images animées de secours, utilisées seulement si le navigateur bloque la lecture automatique des vidéos (ex. Safari en mode économie d'énergie) : à refaire si on change une vidéo de l'accueil, `beauty.jpg`, `fashion.jpg`, `lifestyle.jpg` (visuels des trois grandes cartes de l'accueil)
 - `assets/beauty/`, `assets/fashion/`, `assets/lifestyle/` : les photos et vidéos de chaque galerie
 - `assets/about/portrait.jpg` : sa photo pour la page About
 
