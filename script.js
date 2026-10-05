@@ -74,6 +74,7 @@
   /* Home hero video: loops while visible, pauses off screen (and stays still if the visitor prefers less motion) */
   var heroVid = $('.hero-video');
   if (heroVid) {
+    if (window.matchMedia('(min-width: 821px) and (min-aspect-ratio: 4/5)').matches) heroVid.poster = 'assets/home/hero-wide-poster.jpg';
     if (reduce) { heroVid.removeAttribute('autoplay'); heroVid.pause(); }
     else if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (entries) {

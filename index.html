@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=12">
+  <link rel="stylesheet" href="style.css?v=13">
 </head>
 <body class="home">
   <header class="site-header">
@@ -40,7 +40,10 @@
   <main>
     <section class="hero">
       <div class="hero-media">
-        <video class="hero-video" src="assets/home/hero.mp4" poster="assets/home/hero-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="Sarissa, video portrait"></video>
+        <video class="hero-video" poster="assets/home/hero-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="Sarissa, video portrait">
+          <source src="assets/home/hero-wide.mp4" type="video/mp4" media="(min-width: 821px) and (min-aspect-ratio: 4/5)">
+          <source src="assets/home/hero.mp4" type="video/mp4">
+        </video>
       </div>
       <div class="hero-inner">
         <h1 class="wordmark-xl" aria-label="Sarissa"><span aria-hidden="true" style="--i:0">S</span><span aria-hidden="true" style="--i:1">a</span><span aria-hidden="true" style="--i:2">r</span><span aria-hidden="true" style="--i:3">i</span><span aria-hidden="true" style="--i:4">s</span><span aria-hidden="true" style="--i:5">s</span><span aria-hidden="true" style="--i:6">a</span></h1>
@@ -97,8 +100,8 @@
       <a class="to-top" href="#" data-top>Back to top <span aria-hidden="true">&uarr;</span></a>
     </div>
   </footer>
-  <script src="content.js?v=12"></script>
-  <script src="script.js?v=12"></script>
+  <script src="content.js?v=13"></script>
+  <script src="script.js?v=13"></script>
   <!-- Cloudflare Web Analytics --><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "9e6782a55d4944d29371c97cfbad153e"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
