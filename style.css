@@ -54,10 +54,20 @@ body::after{width:40vw;height:40vw;right:-12vw;bottom:-6vh;background:radial-gra
 .hero-media{position:absolute;inset:0;background:radial-gradient(60% 80% at 50% 40%,#4a0a1a 0,#24030c 55%,#160208 100%)}
 .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%}
 @media (min-width:821px) and (min-aspect-ratio:4/5){
-  /* Wide screens: the face-cropped video takes about two thirds of the width, its edges melting into the wine background */
-  .hero-video{left:50%;right:auto;width:auto;height:100%;aspect-ratio:1440 / 1280;object-position:50% 50%;transform:translateX(-50%);
-    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%)}
+  /* Wide screens: the video fills the width, leaving only a thin border on each side that melts into the wine background */
+  .hero-video{left:50%;right:auto;width:calc(100% - 2 * clamp(20px,4vw,72px));height:100%;object-fit:cover;object-position:50% 45%;transform:translateX(-50%);
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%)}
 }
+@media (min-width:821px) and (min-aspect-ratio:4/5) and (max-height:800px){
+  /* Shorter screens: the wordmark sits higher, so the face goes up a little */
+  .hero-video{object-position:50% 62%}
+}
+/* Never show the browser's own play button on background videos */
+.hero-video::-webkit-media-controls,.world video::-webkit-media-controls{display:none!important}
+.hero-video::-webkit-media-controls-start-playback-button,.world video::-webkit-media-controls-start-playback-button{display:none!important;-webkit-appearance:none}
+/* Animated image used instead of a video when the browser blocks autoplay */
+.world .world-anim{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s ease}
+.world .world-anim.on{opacity:1}
 }
 .hero-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 70%;animation:settle 2.4s cubic-bezier(.2,.7,.2,1) both}
 @keyframes settle{from{transform:scale(1.08)}to{transform:scale(1)}}
